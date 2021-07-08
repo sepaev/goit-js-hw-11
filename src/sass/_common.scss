@@ -1,0 +1,32 @@
+li {
+  list-style: none;
+  border: solid 2px grey;
+  border-radius: 20px;
+  margin: 10px;
+
+  &:hover img {
+    filter: blur(0px);
+  }
+}
+
+img {
+  padding: 20px;
+  filter: blur(5px);
+}
+
+ul {
+  display: flex;
+  text-align: center;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+}
+
+body {
+  text-align: center;
+}
+p {
+  color: black;
+}
