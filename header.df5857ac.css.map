@@ -1,0 +1,1 @@
+{"version":3,"sources":["sass\\header.scss"],"names":[],"mappings":"AAAA,OACE,mBAAA,CACA","file":"header.df5857ac.css","sourceRoot":"..\\src","sourcesContent":["header {\r\n  padding-bottom: 30px;\r\n  text-align: center;\r\n}\r\n"]}
