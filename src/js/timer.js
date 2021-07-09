@@ -71,7 +71,6 @@ refs.startBtn.addEventListener('click', startTimer);
 
 const unlockButton = () => {
     const currentCalValue = refs.calendar.valueAsNumber - 10800000
-    console.log(currentCalValue + ' ' + currentTime);
     if (!currentCalValue) return
     if (currentCalValue > currentTime) {
     refs.startBtn.disabled = false;
