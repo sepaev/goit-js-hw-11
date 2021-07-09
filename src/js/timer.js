@@ -18,15 +18,14 @@ const timeRemaining = endDate => {
     currentTime = Date.parse(new Date());
     if (endDate > currentTime) {
         timeLeft = endDate - currentTime;
-        let divided = timeLeft / 1000;
-        const seconds = Math.floor(divided % 60);
-        divided /= 60;
-        const minutes = Math.floor(divided % 60);
-        divided /= 60;
-        const hours = Math.floor(divided % 60);
-        console.log(divided);
-        const days = Math.floor((divided - hours)/ 24);
-        // const days = Math.floor(divided % 24);
+        let calc = timeLeft / 1000;
+        const seconds = Math.floor(calc % 60);
+        calc = (calc - seconds )/60;
+        const minutes = Math.floor(calc % 60);
+        calc = (calc - minutes )/60;
+        const hours = Math.floor(calc % 24);
+        const days = (calc - hours )/24;
+        // const days = Math.floor(calc % 24);
         return {timeLeft, days, hours, minutes, seconds};
     };
     return {timeLeft:0, days:0, hours:0, minutes:0, seconds:0} 
@@ -54,7 +53,6 @@ const tick = () => {
         clearInterval(timeInterval);
         timeInterval = null;
     };
-    console.log(getTimeRemaining.days);
     refs.days.innerHTML = toSpan(getTimeRemaining.days);
     refs.hours.innerHTML =  toSpan(getTimeRemaining.hours);
     refs.minutes.innerHTML =  toSpan(getTimeRemaining.minutes);
@@ -72,7 +70,8 @@ const startTimer = () => {
 refs.startBtn.addEventListener('click', startTimer);
 
 const unlockButton = () => {
-    const currentCalValue = refs.calendar.valueAsNumber-10800000
+    const currentCalValue = refs.calendar.valueAsNumber - 10800000
+    console.log(currentCalValue + ' ' + currentTime);
     if (!currentCalValue) return
     if (currentCalValue > currentTime) {
     refs.startBtn.disabled = false;
