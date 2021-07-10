@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Подзадание 1</title><link rel="stylesheet" href="/goit-js-hw-11/header.df5857ac.css"><link rel="stylesheet" href="/goit-js-hw-11/promis.61dc1646.css"></head><body>  <header class="task3"> <h1>Подзадание 2 - перепиши функцию <code>toggleUserState()</code></h1> <a href="/goit-js-hw-11/html\goit-js-hw-11-promisification.html">Назад к заданию 3</a> </header><section> <details closed=""> <summary style="color:teal">Задание</summary> <p> Перепиши функцию <code>toggleUserState()</code> так, чтобы она не использовала callback-функцию <code>callback</code>, а принимала всего два параметра <code>allUsers</code> и <code>username</code> и возвращала промис. </p> <div class="highlight highlight-source-js position-relative"> <pre><span class="pl-k">const</span> <span class="pl-s1">users</span> <span class="pl-c1">=</span> <span class="pl-kos">[</span>
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Подзадание 1</title><link rel="stylesheet" href="/goit-js-hw-11/header.8d7e2fb2.css"><link rel="stylesheet" href="/goit-js-hw-11/promis.48d9adae.css"></head><body>  <header class="task3"> <h1>Подзадание 2 - перепиши функцию <code>toggleUserState()</code></h1> <a href="/goit-js-hw-11/html\goit-js-hw-11-promisification.html">Назад к заданию 3</a> </header><section class="promis2"> <details class="promis2__details" closed=""> <summary style="color:teal">Задание</summary> <p> Перепиши функцию <code>toggleUserState()</code> так, чтобы она не использовала callback-функцию <code>callback</code>, а принимала всего два параметра <code>allUsers</code> и <code>username</code> и возвращала промис. </p> <div class="highlight highlight-source-js position-relative"> <pre><span class="pl-k">const</span> <span class="pl-s1">users</span> <span class="pl-c1">=</span> <span class="pl-kos">[</span>
   <span class="pl-kos">{</span> <span class="pl-c1">name</span>: <span class="pl-s">'Mango'</span><span class="pl-kos">,</span> <span class="pl-c1">active</span>: <span class="pl-c1">true</span> <span class="pl-kos">}</span><span class="pl-kos">,</span>
   <span class="pl-kos">{</span> <span class="pl-c1">name</span>: <span class="pl-s">'Poly'</span><span class="pl-kos">,</span> <span class="pl-c1">active</span>: <span class="pl-c1">false</span> <span class="pl-kos">}</span><span class="pl-kos">,</span>
   <span class="pl-kos">{</span> <span class="pl-c1">name</span>: <span class="pl-s">'Ajax'</span><span class="pl-kos">,</span> <span class="pl-c1">active</span>: <span class="pl-c1">false</span> <span class="pl-kos">}</span><span class="pl-kos">,</span>
@@ -39,4 +39,26 @@ toggleUserState(users, 'Ajax', console.table);
 // The function should work like this
 toggleUserState(users, 'Mango').then(console.table);
 toggleUserState(users, 'Ajax').then(console.table);
-" tabindex="0" role="button"> </clipboard-copy> </div> </div> </details> </section>  <script src="/goit-js-hw-11/promis02.60453cf0.js"></script> </body></html>
+" tabindex="0" role="button"> </clipboard-copy> </div> </div> </details> <details class="promis2__details" closed=""> <summary style="color:teal">Решение</summary> <pre><code>
+const users = [
+  { name: 'Mango', active: true },
+  { name: 'Poly', active: false },
+  { name: 'Ajax', active: false },
+];
+
+const toggleUserState = (allUsers, username) => {
+    return new Promise((resolve, reject) => {
+        const updatedUsers = allUsers.map(user =>
+            user.name === username ? { ...user, active: !user.active } : user
+        );
+        if (updatedUsers) {
+            resolve(updatedUsers);
+        } else {
+            reject('Error');
+        }
+    });
+};  
+
+toggleUserState(users, 'Mango').then(console.table);
+toggleUserState(users, 'Ajax').then(console.table); 
+</code></pre> </details> </section>  <script src="/goit-js-hw-11/promis02.66618715.js"></script> </body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Подзадание 1</title><link rel="stylesheet" href="/goit-js-hw-11/header.df5857ac.css"><link rel="stylesheet" href="/goit-js-hw-11/promis.61dc1646.css"></head><body>  <header class="task3"> <h1>Подзадание 3 - Перепиши функцию <code>makeTransaction()</code></h1> <a href="/goit-js-hw-11/html\goit-js-hw-11-promisification.html">Назад к заданию 3</a> </header><section> <details closed=""> <summary style="color:teal">Задание</summary> <p> Перепиши функцию <code>makeTransaction()</code> так, чтобы она не использовала callback-функции <code>onSuccess</code> и <code>onError</code>, а принимала всего один параметр <code>transaction</code> и возвращала промис. </p> <div class="highlight highlight-source-js position-relative"> <pre><span class="pl-k">const</span> <span class="pl-en"><span class="pl-token" data-hydro-click="{&quot;event_type&quot;:&quot;code_navigation.click_on_symbol&quot;,&quot;payload&quot;:{&quot;action&quot;:&quot;click_on_symbol&quot;,&quot;repository_id&quot;:187316928,&quot;ref&quot;:&quot;main&quot;,&quot;language&quot;:&quot;Markdown&quot;,&quot;originating_url&quot;:&quot;https://github.com/goitacademy/javascript-homework/tree/main/v2/09&quot;,&quot;user_id&quot;:14824921}}" data-hydro-click-hmac="bb2448622858d58c02f3b50522938b37ecd35f8330a559c25077eaab6410a1bb">randomIntegerFromInterval</span></span> <span class="pl-c1">=</span> <span class="pl-kos">(</span><span class="pl-s1">min</span><span class="pl-kos">,</span> <span class="pl-s1">max</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Подзадание 1</title><link rel="stylesheet" href="/goit-js-hw-11/header.8d7e2fb2.css"><link rel="stylesheet" href="/goit-js-hw-11/promis.48d9adae.css"></head><body>  <header class="task3"> <h1>Подзадание 3 - Перепиши функцию <code>makeTransaction()</code></h1> <a href="/goit-js-hw-11/html\goit-js-hw-11-promisification.html">Назад к заданию 3</a> </header><section class="promis3"> <details class="promis3__details" closed=""> <summary style="color:teal">Задание</summary> <p> Перепиши функцию <code>makeTransaction()</code> так, чтобы она не использовала callback-функции <code>onSuccess</code> и <code>onError</code>, а принимала всего один параметр <code>transaction</code> и возвращала промис. </p> <div class="highlight highlight-source-js position-relative"> <pre><span class="pl-k">const</span> <span class="pl-en"><span class="pl-token" data-hydro-click="{&quot;event_type&quot;:&quot;code_navigation.click_on_symbol&quot;,&quot;payload&quot;:{&quot;action&quot;:&quot;click_on_symbol&quot;,&quot;repository_id&quot;:187316928,&quot;ref&quot;:&quot;main&quot;,&quot;language&quot;:&quot;Markdown&quot;,&quot;originating_url&quot;:&quot;https://github.com/goitacademy/javascript-homework/tree/main/v2/09&quot;,&quot;user_id&quot;:14824921}}" data-hydro-click-hmac="bb2448622858d58c02f3b50522938b37ecd35f8330a559c25077eaab6410a1bb">randomIntegerFromInterval</span></span> <span class="pl-c1">=</span> <span class="pl-kos">(</span><span class="pl-s1">min</span><span class="pl-kos">,</span> <span class="pl-s1">max</span><span class="pl-kos">)</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
   <span class="pl-k">return</span> <span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">floor</span><span class="pl-kos">(</span><span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">random</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">*</span> <span class="pl-kos">(</span><span class="pl-s1">max</span> <span class="pl-c1">-</span> <span class="pl-s1">min</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span><span class="pl-kos">)</span> <span class="pl-c1">+</span> <span class="pl-s1">min</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
 <span class="pl-kos">}</span><span class="pl-kos">;</span>
 
@@ -71,4 +71,37 @@ makeTransaction({ id: 70, amount: 150 }).then(logSuccess).catch(logError);
 makeTransaction({ id: 71, amount: 230 }).then(logSuccess).catch(logError);
 makeTransaction({ id: 72, amount: 75 }).then(logSuccess).catch(logError);
 makeTransaction({ id: 73, amount: 100 }).then(logSuccess).catch(logError);
-" tabindex="0" role="button"> </clipboard-copy> </div> </div> </details> </section>  <script src="/goit-js-hw-11/promis03.f84e1103.js"></script> </body></html>
+" tabindex="0" role="button"> </clipboard-copy> </div> </div> </details> <details class="promis3__details" closed=""> <summary style="color:teal">Решение</summary> <pre><code>
+const randomIntegerFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const makeTransaction = transaction => {
+  const delay = randomIntegerFromInterval(200, 500);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const canProcess = Math.random() > 0.3;
+
+      if (canProcess) {
+        resolve({ id: transaction.id, time: delay });
+      } else {
+        reject(transaction.id);
+      }
+    }, delay);
+  });
+};
+
+const logSuccess = ({ id, time }) => {
+  console.log(`Transaction ${id} processed in ${time}ms`);
+};
+
+const logError = id => {
+  console.warn(`Error processing transaction ${id}. Please try again later.`);
+};
+
+makeTransaction({ id: 70, amount: 150 }).then(logSuccess).catch(logError);
+makeTransaction({ id: 71, amount: 230 }).then(logSuccess).catch(logError);
+makeTransaction({ id: 72, amount: 75 }).then(logSuccess).catch(logError);
+makeTransaction({ id: 73, amount: 100 }).then(logSuccess).catch(logError);
+</code></pre> </details> </section>  <script src="/goit-js-hw-11/promis03.db790920.js"></script> </body></html>

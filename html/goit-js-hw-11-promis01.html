@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Подзадание 1</title><link rel="stylesheet" href="/goit-js-hw-11/header.df5857ac.css"><link rel="stylesheet" href="/goit-js-hw-11/promis.61dc1646.css"></head><body>  <header class="task3"> <h1>Подзадание 1 - напиши функцию <code>delay(ms)</code></h1> <a href="/goit-js-hw-11/html\goit-js-hw-11-promisification.html">Назад к заданию 3</a> </header><section class="promis1"> <details closed=""> <summary style="color:teal">Задание</summary> <p> Напиши функцию <code>delay(ms)</code>, которая возвращает промис, переходящий в состояние <code>"resolved"</code> через <code>ms</code> миллисекунд. Значением исполнившегося промиса должно быть то кол-во миллисекунд которое передали во время вызова функции <code>delay</code>. </p> <div class="highlight highlight-source-js position-relative"> <pre><span class="pl-k">const</span> <span class="pl-en">delay</span> <span class="pl-c1">=</span> <span class="pl-s1">ms</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Подзадание 1</title><link rel="stylesheet" href="/goit-js-hw-11/header.8d7e2fb2.css"><link rel="stylesheet" href="/goit-js-hw-11/promis.48d9adae.css"></head><body>  <header class="task3"> <h1>Подзадание 1 - напиши функцию <code>delay(ms)</code></h1> <a href="/goit-js-hw-11/html\goit-js-hw-11-promisification.html">Назад к заданию 3</a> </header><section class="promis1 promis2"> <details class="promis3__details" closed=""> <summary style="color:teal">Задание</summary> <p> Напиши функцию <code>delay(ms)</code>, которая возвращает промис, переходящий в состояние <code>"resolved"</code> через <code>ms</code> миллисекунд. Значением исполнившегося промиса должно быть то кол-во миллисекунд которое передали во время вызова функции <code>delay</code>. </p> <div class="highlight highlight-source-js position-relative"> <pre><span class="pl-k">const</span> <span class="pl-en">delay</span> <span class="pl-c1">=</span> <span class="pl-s1">ms</span> <span class="pl-c1">=&gt;</span> <span class="pl-kos">{</span>
   <span class="pl-c">// Change this function</span>
 <span class="pl-kos">}</span><span class="pl-kos">;</span>
 
@@ -17,4 +17,66 @@ const logger = time => console.log(`Fulfilled after ${time}ms`);
 delay(2000).then(logger); // Fulfilled after 2000ms
 delay(1000).then(logger); // Fulfilled after 1000ms
 delay(1500).then(logger); // Fulfilled after 1500ms
-" tabindex="0" role="button"> </clipboard-copy> </div> </div> </details> </section><form action="" class="promis1__form"> <h3 class="promis1__h3">Список кнопок с различной задержкой</h3> <div class="promis1__buttons"></div> <h3 class="promis1__h3">Состояние</h3> <p class="promis1__result">nothing happens yet</p> </form>  <script src="/goit-js-hw-11/promis01.4f3d4ee7.js"></script> </body></html>
+" tabindex="0" role="button"> </clipboard-copy> </div> </div> </details> <details class="promis3__details" closed=""> <summary style="color:teal">Решение</summary> <pre><code>
+const refs = {
+    buttons: document.querySelector('.promis1__buttons'),
+    result: document.querySelector('.promis1__result'),
+    form: document.querySelector('.promis1__form')
+}
+let promise;
+// отображаю кнопки
+function addButtons(n) {
+    if (n < 3) n = 3;
+    let htmlTxt = '';
+    for (i = 0; i < n; i++) {
+        let number = (Math.floor(Math.random() * (80 - 10)) + 10)*100;
+        htmlTxt += `<button>${number}</button>`;
+    }
+    refs.buttons.innerHTML = htmlTxt;
+}
+addButtons(Math.random() * 10);
+
+// клик по кнопкам
+refs.buttons.addEventListener('click', buttonClick);
+
+function buttonClick(e) {
+    e.preventDefault();
+    if (e.target.nodeName !== "BUTTON") return;
+    const time = Number(e.target.innerText)
+    delay(time);
+    refs.result.innerHTML = `The program is working. ${time / 1000} sec left`;
+        refs.result.style.backgroundColor = 'white';
+}
+
+// функция delay()
+function delay(ms) {
+    const isSuccess = true;
+    
+    promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (isSuccess) {
+                resolve(ms);
+            } else {
+                reject("Error! Error passed to reject function");
+            }
+        }, ms);
+    });
+    
+    promise.then(
+      value => {
+        logger(value)
+      },
+      error => {
+        console.log("onReject call inside promise.then()");
+        console.log(error); // "Error! Error passed to reject function"
+      }
+    );
+};
+
+
+function logger(time) {
+    console.log(`Fulfilled after ${time}ms`);
+    refs.result.innerHTML = `Fulfilled after ${time}ms`;
+    refs.result.style.backgroundColor = 'green';
+}
+</code></pre> </details> </section><form action="" class="promis1__form"> <h3 class="promis1__h3">Список кнопок с различной задержкой</h3> <div class="promis1__buttons"></div> <h3 class="promis1__h3">Состояние</h3> <p class="promis1__result">nothing happens yet</p> </form>  <script src="/goit-js-hw-11/promis01.b671f9b8.js"></script> </body></html>
