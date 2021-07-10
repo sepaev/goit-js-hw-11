@@ -1,4 +1,17 @@
 header {
   padding-bottom: 30px;
   text-align: center;
+
+  & a {
+    color: green;
+    width: 180px;
+    border: 1px solid blue;
+    display: flex;
+    margin: auto;
+    text-decoration: auto;
+    justify-content: center;
+    padding: 10px;
+    background-color: cornsilk;
+    border-radius: 20px;
+  }
 }

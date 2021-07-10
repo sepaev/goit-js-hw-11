@@ -39,3 +39,17 @@
     justify-content: center;
   }
 }
+
+.promis2,
+.promis3 {
+  display: flex;
+
+  &__details {
+    width: 50%;
+    border: solid 1px green;
+    border-radius: 0 20px 20px 0;
+    margin: 20px;
+    background-color: lightyellow;
+    padding: 10px;
+  }
+}

@@ -6,9 +6,10 @@ const refs = {
 let promise;
 // отображаю кнопки
 function addButtons(n) {
+    if (n < 3) n = 3;
     let htmlTxt = '';
     for (i = 0; i < n; i++) {
-        let number = Math.floor(Math.random() * (8000 - 1000)) + 1000;
+        let number = (Math.floor(Math.random() * (80 - 10)) + 10)*100;
         htmlTxt += `<button>${number}</button>`;
     }
     refs.buttons.innerHTML = htmlTxt;
